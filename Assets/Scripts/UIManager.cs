@@ -64,7 +64,7 @@ public class UIManager : MonoBehaviour
         {
             AutoAttackUpgradeBtnTxt.text = $"{GameManager.Instance.upgradeState.currentAutoUpgradeCost}G\n" +
            $"Upgrade\n" +
-           $"<color=#FF0000>+{GameManager.Instance.upgradeState.plusAttackStat}</color>";
+           $"<color=#FF0000>-{0.05}</color>";
 
             CurrnetAutoStat.text = $"Auto Attack\nLv.<color=#FF0000>{GameManager.Instance.upgradeState.autoAttackLevel}</color>" +
                 $"\nSpeed : {CharacterManager.Instance.Player.controller.Data.AutoAttackSpeed}";

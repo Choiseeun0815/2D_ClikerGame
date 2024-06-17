@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Player
   m_EditorClassIdentifier: 
   maxHealth: 100
-  Damage: 7.5
+  Damage: 1
   evasionRate: 5
   AutoAttackSpeed: 1

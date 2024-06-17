@@ -6,8 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] public PlayerSO Data;
+    private AudioSource audioSource;
 
-    private float curHP;
     private Animator animator;
 
     private bool isAttacking = false;
@@ -17,7 +17,7 @@ public class PlayerAttackController : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        curHP = Data.maxHealth;
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void OnAttack(InputAction.CallbackContext context)
@@ -37,7 +37,7 @@ public class PlayerAttackController : MonoBehaviour
                 {
                     enemy.TakeDamage(Data.Damage);
                     animator.SetTrigger("Attack");
-
+                    PlayRandomAttackSound();
                     isAttacking = true;
                 }
             }
@@ -84,14 +84,17 @@ public class PlayerAttackController : MonoBehaviour
         {
             enemy.TakeDamage(Data.Damage);
             animator.SetTrigger("AutoAttack");
+            PlayRandomAttackSound();
             yield return new WaitForSeconds(Data.AutoAttackSpeed);
         }
         isAttacking = false;
     }
-
-    public void TakeDamage(int damage)
+    
+    private void PlayRandomAttackSound()
     {
-        curHP -= damage;
-        animator.SetTrigger("Hit");
+        int randomIdx = UnityEngine.Random.Range(0, 2);
+        AudioClip attackAudio = randomIdx == 0 ? SoundManager.Instance.attackSound1 : SoundManager.Instance.attackSound2;
+        audioSource.PlayOneShot(attackAudio);
+
     }
 }
