@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -58,6 +60,38 @@ public class PlayerAttackController : MonoBehaviour
             }
         }
         return isAttacking;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Ãæµ¹");
+        if(collision.CompareTag("Enemy"))
+        {
+            Enemy enemy = collision.GetComponent<Enemy>();
+            if(enemy!=null)
+            {
+                StartCoroutine(AttackAutoEnemy(enemy));
+            }
+        }
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
+        {
+            StopAllCoroutines();
+            isAttacking = false;
+        }
+    }
+    private IEnumerator AttackAutoEnemy(Enemy enemy)
+    {
+        isAttacking = true;
+        while(enemy!= null && isAttacking)
+        {
+            enemy.TakeDamage(Data.Damage);
+            animator.SetTrigger("Attack");
+            yield return new WaitForSeconds(Data.AutoAttackSpeed);
+        }
+        isAttacking= false; 
     }
 
     public void TakeDamage(int damage)

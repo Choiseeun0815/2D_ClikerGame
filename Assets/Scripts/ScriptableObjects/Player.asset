@@ -15,4 +15,4 @@ MonoBehaviour:
   maxHealth: 100
   Damage: 1
   evasionRate: 5
-  AutoAttackSpeed: 0
+  AutoAttackSpeed: 1

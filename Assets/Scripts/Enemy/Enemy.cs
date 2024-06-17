@@ -23,23 +23,19 @@ public class Enemy : MonoBehaviour
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
     }
 
-    void Update()
-    {
-        
-    }
     private void OnEnable()
     {
         curHP = Data.maxHealth;
     }
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         curHP -= damage;
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
         if (curHP <= 0)
         {
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
             animator.SetTrigger("Die");
             StartCoroutine(DisableAfterAnimation());
-            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
