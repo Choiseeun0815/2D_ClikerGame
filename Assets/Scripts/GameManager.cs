@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
     public EnemySpawner enemySpawner;
 
     // Stage 5-1 => 5는 currentStage, 1은 currentMiniState
-    int currentStage = 1;
-    int currentMiniState = 1;
+    public int currentStage = 1;
+    public int currentMiniState = 1;
 
-    bool CanAutoAttack = false; //AutoAttack 아이템을 구매하면 true로 전환
+    public bool CanAutoAttack = false; //AutoAttack 아이템을 구매하면 true로 전환
 
     private void Awake()
     {

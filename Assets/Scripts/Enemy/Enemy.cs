@@ -33,8 +33,16 @@ public class Enemy : MonoBehaviour
     {
         curHP -= damage;
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
+
         if (curHP <= 0)
         {
+            GameManager.Instance.currentMiniState++;
+            if(GameManager.Instance.currentMiniState > 5) 
+            {
+                GameManager.Instance.currentMiniState = 1;
+                GameManager.Instance.currentStage++;
+            }
+
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             animator.SetTrigger("Die");
             StartCoroutine(DisableAfterAnimation());

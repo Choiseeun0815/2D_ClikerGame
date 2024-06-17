@@ -15,3 +15,4 @@ MonoBehaviour:
   maxHealth: 20
   Damage: 2
   evasionRate: 10
+  Gold: 1

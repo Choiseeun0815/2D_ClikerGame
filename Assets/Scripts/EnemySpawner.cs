@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -12,11 +11,9 @@ public class EnemySpawner : MonoBehaviour
         if (GameManager.Instance.pool.pools.Count == 0) return;
 
         int rndIndex = Random.Range(0, GameManager.Instance.pool.pools.Count);
-        Debug.Log($"pools.Count : {GameManager.Instance.pool.pools.Count}");
         var selecetedEnemy = GameManager.Instance.pool.pools[rndIndex];
 
         GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(selecetedEnemy.tag);
-        Debug.Log($"curRndIndex : {rndIndex} // tag : {selecetedEnemy.tag}" );
 
         if (enemyObj != null)
         {
@@ -39,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemy != null)
             {
                 enemy.RunAnim(true);
-                // 몬스터가 달려오는 중에는 콜라이더를 비활성화하여 공격이 불가능하도록 함
+                // 몬스터가 달려오는 중에는 콜라이더를 비활성화하여 클릭을 통한 공격이 불가능하도록 함
                 enemy.GetComponent<BoxCollider2D>().enabled = false;
             }
 
@@ -53,6 +50,4 @@ public class EnemySpawner : MonoBehaviour
             }
         }
     }
-
-    
 }
