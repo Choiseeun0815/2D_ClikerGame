@@ -24,7 +24,23 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         curHP -= damage;
-        //curHP -= CharacterManager.Instance.Player.controller.Data.Damage;
-        animator.SetTrigger("Hit");
+        
+        if (curHP <= 0)
+        {
+            animator.SetTrigger("Die");
+            StartCoroutine(DisableAfterAnimation());
+        }
+        else
+        {
+            animator.SetTrigger("Hit");
+        }
+    }
+
+    private IEnumerator DisableAfterAnimation()
+    {
+        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
+        yield return new WaitForSeconds(animationLength);
+
+        gameObject.SetActive(false);
     }
 }

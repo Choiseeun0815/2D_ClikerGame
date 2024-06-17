@@ -17,15 +17,31 @@ public class PlayerController : MonoBehaviour
     {
         
     }
-    public void OnAttack()
+    public void OnAttack(InputAction.CallbackContext context)
     {
-        animator.SetBool("Attack", true);
+        if(context.performed)
+        {
+            Debug.Log("OnAttack()");
+            Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
+
+            if (hit.collider != null)
+            {
+                Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(Data.Damage);
+                    animator.SetTrigger("Attack");
+                }
+            }
+        }
     }
+
     public void TakeDamage(int damage)
     {
         curHP -= damage;
-        //animator.SetTrigger("Hit");
+        animator.SetTrigger("Hit");
     }
-
     
 }
