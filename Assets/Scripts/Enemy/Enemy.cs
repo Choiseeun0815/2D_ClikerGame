@@ -11,12 +11,14 @@ public class Enemy : MonoBehaviour
     private Animator animator;
 
     [SerializeField] EnemyHpBar enemyHpBar;
+    private AudioSource audioSource;
 
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         enemyHpBar = GetComponentInChildren<EnemyHpBar>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -47,6 +49,8 @@ public class Enemy : MonoBehaviour
 
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             animator.SetTrigger("Die");
+            audioSource.PlayOneShot(SoundManager.Instance.EnemyDieSound);
+
             StartCoroutine(DisableAfterAnimation());
         }
         else

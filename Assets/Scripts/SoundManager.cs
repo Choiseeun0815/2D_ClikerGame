@@ -11,6 +11,8 @@ public class SoundManager : MonoBehaviour
 
     public AudioClip UpgradeStatSound;
 
+    public AudioClip EnemyDieSound;
+
     private void Awake()
     {
         if (Instance == null)

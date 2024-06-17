@@ -2099,6 +2099,7 @@ MonoBehaviour:
   attackSound1: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
   attackSound2: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   UpgradeStatSound: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  EnemyDieSound: {fileID: 8300000, guid: 5039414d94a6e4e70a5ab9e8833e992a, type: 3}
 --- !u!4 &1375703161
 Transform:
   m_ObjectHideFlags: 0

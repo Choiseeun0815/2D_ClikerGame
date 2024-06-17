@@ -28,6 +28,7 @@ public class UpgradeState: MonoBehaviour
                 currentAttakUpgradeCost = attackLevel % 3 == 0 ? currentAttakUpgradeCost + 1 : currentAttakUpgradeCost;
                 plusAttackStat = attackLevel % 5 == 0 ? plusAttackStat + .5f : plusAttackStat;
             }
+
             audioSource.PlayOneShot(SoundManager.Instance.UpgradeStatSound);
         }
     }
