@@ -38,6 +38,8 @@ public class EnemySpawner : MonoBehaviour
             if (enemy != null)
             {
                 enemy.RunAnim(true);
+                // 몬스터가 달려오는 중에는 콜라이더를 비활성화하여 공격이 불가능하도록 함
+                enemy.GetComponent<BoxCollider2D>().enabled = false;
             }
 
             enemyObj.transform.position = Vector2.MoveTowards(enemyObj.transform.position, targetPos.position, 4f * Time.deltaTime);
@@ -46,6 +48,7 @@ public class EnemySpawner : MonoBehaviour
             if (enemy != null)
             {
                 enemy.RunAnim(false);
+                enemy.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
     }

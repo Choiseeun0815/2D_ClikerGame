@@ -10,7 +10,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private bool isAttacking = false;
     private float attackTime = 0f;
-    [SerializeField] private float hitTime = 0.07f;
+    private float hitTime = 0.03f;
 
     void Start()
     {

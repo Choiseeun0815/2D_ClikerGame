@@ -8,32 +8,38 @@ public class Enemy : MonoBehaviour
     [field: Header("Reference")]
     [SerializeField] public EnemySO Data;
 
-    public int curHP;
+    public float curHP;
 
     private Animator animator;
-
+    [SerializeField] EnemyHpBar enemyHpBar;
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        enemyHpBar = GetComponentInChildren<EnemyHpBar>();
     }
     void Start()
     {
         curHP = Data.maxHealth;
+        enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
     }
 
     void Update()
     {
         
     }
-
+    private void OnEnable()
+    {
+        curHP = Data.maxHealth;
+    }
     public void TakeDamage(int damage)
     {
         curHP -= damage;
-        
+        enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
         if (curHP <= 0)
         {
             animator.SetTrigger("Die");
             StartCoroutine(DisableAfterAnimation());
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
         }
         else
         {
@@ -46,10 +52,6 @@ public class Enemy : MonoBehaviour
         if (animator != null)
         {
             animator.SetBool("Run", isRunning);
-        }
-        else
-        {
-            Debug.LogWarning("Animator is not assigned in Enemy!");
         }
     }
     private IEnumerator DisableAfterAnimation()
