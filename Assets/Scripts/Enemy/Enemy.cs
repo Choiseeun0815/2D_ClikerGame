@@ -43,6 +43,8 @@ public class Enemy : MonoBehaviour
                 GameManager.Instance.currentStage++;
             }
 
+            GameManager.Instance.Gold += Data.Gold;
+
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             animator.SetTrigger("Die");
             StartCoroutine(DisableAfterAnimation());

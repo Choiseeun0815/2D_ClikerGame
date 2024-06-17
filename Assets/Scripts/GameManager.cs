@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
 
     public bool CanAutoAttack = false; //AutoAttack 아이템을 구매하면 true로 전환
 
+    public int Gold = 0;
+
     private void Awake()
     {
         if (Instance == null)
