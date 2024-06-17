@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] public EnemySO Data;
 
     public float curHP;
+    private int previousStage;
     private Animator animator;
 
     [SerializeField] EnemyHpBar enemyHpBar;
@@ -24,6 +25,7 @@ public class Enemy : MonoBehaviour
     {
         curHP = Data.maxHealth;
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
+        previousStage = GameManager.Instance.currentStage;
     }
 
     private void OnDisable()
@@ -49,6 +51,9 @@ public class Enemy : MonoBehaviour
 
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             animator.SetTrigger("Die");
+
+            Data.maxHealth += GameManager.Instance.currentStage;
+
             audioSource.PlayOneShot(SoundManager.Instance.EnemyDieSound);
 
             StartCoroutine(DisableAfterAnimation());

@@ -8,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
     public void SpawningEnemy()
     {
+
         if (GameManager.Instance.pool.pools.Count == 0) return;
 
         int rndIndex = Random.Range(0, GameManager.Instance.pool.pools.Count);
@@ -40,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
                 enemy.GetComponent<BoxCollider2D>().enabled = false;
             }
 
-            enemyObj.transform.position = Vector2.MoveTowards(enemyObj.transform.position, targetPos.position, 4f * Time.deltaTime);
+            enemyObj.transform.position = Vector2.MoveTowards(enemyObj.transform.position, targetPos.position, 6f * Time.deltaTime);
             yield return null;
 
             if (enemy != null)
