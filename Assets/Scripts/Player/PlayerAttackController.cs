@@ -7,7 +7,7 @@ public class PlayerAttackController : MonoBehaviour
 {
     [SerializeField] public PlayerSO Data;
 
-    private int curHP;
+    private float curHP;
     private Animator animator;
 
     private bool isAttacking = false;
@@ -86,12 +86,13 @@ public class PlayerAttackController : MonoBehaviour
     {
         isAttacking = true;
         while(enemy!= null && isAttacking)
+        //while (enemy != null )
         {
             enemy.TakeDamage(Data.Damage);
             animator.SetTrigger("Attack");
             yield return new WaitForSeconds(Data.AutoAttackSpeed);
         }
-        isAttacking= false; 
+        isAttacking = false;
     }
 
     public void TakeDamage(int damage)

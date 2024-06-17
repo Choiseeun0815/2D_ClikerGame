@@ -1,6 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -9,9 +8,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] public EnemySO Data;
 
     public float curHP;
-
     private Animator animator;
+
     [SerializeField] EnemyHpBar enemyHpBar;
+
+    public event Action OnDeath; // 죽었을 때 발생하는 이벤트
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -23,9 +24,11 @@ public class Enemy : MonoBehaviour
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
     }
 
-    private void OnEnable()
+    private void OnDisable()
     {
         curHP = Data.maxHealth;
+        enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
+        //OnDeath = null;
     }
     public void TakeDamage(float damage)
     {
@@ -54,5 +57,6 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);
+        OnDeath?.Invoke();
     }
 }

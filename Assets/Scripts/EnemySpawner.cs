@@ -7,27 +7,40 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] public Transform spawnPos;
     [SerializeField] public Transform targetPos;
 
-
-    void Update()
-    {
-
-    }
     public void SpawningEnemy()
     {
-        foreach (var items in GameManager.Instance.pool.pools)
-        {
-            for (int i = 0; i < items.size; i++)
-            {
-                GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(items.tag);
-                if (enemyObj != null)
-                {
-                    enemyObj.transform.position = spawnPos.position;
-                    enemyObj.SetActive(true);
+        if (GameManager.Instance.pool.pools.Count == 0) return;
 
-                    StartCoroutine(MoveToTargetPos(enemyObj));
-                }
+        int rndIndex = Random.Range(0, GameManager.Instance.pool.pools.Count);
+        var selecetedEnemy = GameManager.Instance.pool.pools[rndIndex];
+
+        GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(selecetedEnemy.tag);
+        if(enemyObj != null)
+        {
+            enemyObj.transform.position = spawnPos.position;
+            enemyObj.SetActive(true);
+
+            Enemy enemy = enemyObj.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.OnDeath += () => OnEnemyDeath(enemyObj);
+                StartCoroutine(MoveToTargetPos(enemyObj));
             }
         }
+        //foreach (var items in GameManager.Instance.pool.pools)
+        //{
+        //    for (int i = 0; i < items.size; i++)
+        //    {
+        //        GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(items.tag);
+        //        if (enemyObj != null)
+        //        {
+        //            enemyObj.transform.position = spawnPos.position;
+        //            enemyObj.SetActive(true);
+
+        //            StartCoroutine(MoveToTargetPos(enemyObj));
+        //        }
+        //    }
+        //}
     }
     private IEnumerator MoveToTargetPos(GameObject enemyObj)
     {
@@ -51,5 +64,16 @@ public class EnemySpawner : MonoBehaviour
                 enemy.GetComponent<BoxCollider2D>().enabled = true;
             }
         }
+    }
+
+    private void OnEnemyDeath(GameObject enemyObj)
+    {
+        var enemy = enemyObj.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            enemy.OnDeath -= () => OnEnemyDeath(enemyObj);
+        }
+
+        SpawningEnemy();
     }
 }

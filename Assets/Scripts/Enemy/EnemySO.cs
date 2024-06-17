@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemySO : ScriptableObject
 {
     [SerializeField] public float maxHealth;
-    [SerializeField] public int Damage;
+    [SerializeField] public float Damage;
     [SerializeField] public float evasionRate;
+    [SerializeField] public int Gold;
 }
