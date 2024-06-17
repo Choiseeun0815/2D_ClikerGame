@@ -13,6 +13,8 @@ public class UpgradeState: MonoBehaviour
     [SerializeField]private bool isFirstBuy = true;
     public int currentAutoUpgradeCost = 30;
 
+    [SerializeField] private AudioSource audioSource;
+
     public void UpgradeAttackStat()
     {
         if(GameManager.Instance !=null && CharacterManager.Instance !=null)
@@ -26,6 +28,7 @@ public class UpgradeState: MonoBehaviour
                 currentAttakUpgradeCost = attackLevel % 3 == 0 ? currentAttakUpgradeCost + 1 : currentAttakUpgradeCost;
                 plusAttackStat = attackLevel % 5 == 0 ? plusAttackStat + .5f : plusAttackStat;
             }
+            audioSource.PlayOneShot(SoundManager.Instance.UpgradeStatSound);
         }
     }
 
@@ -56,7 +59,9 @@ public class UpgradeState: MonoBehaviour
                 //속도가 0.1f 아래로 떨어지지 않도록 설정 
                 CharacterManager.Instance.Player.controller.Data.AutoAttackSpeed = 0.1f;
             }
+            audioSource.PlayOneShot(SoundManager.Instance.UpgradeStatSound);
         }
-            
     }
+
+   
 }

@@ -95,6 +95,5 @@ public class PlayerAttackController : MonoBehaviour
         int randomIdx = UnityEngine.Random.Range(0, 2);
         AudioClip attackAudio = randomIdx == 0 ? SoundManager.Instance.attackSound1 : SoundManager.Instance.attackSound2;
         audioSource.PlayOneShot(attackAudio);
-
     }
 }

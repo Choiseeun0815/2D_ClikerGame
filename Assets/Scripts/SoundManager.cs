@@ -9,6 +9,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip attackSound1;
     public AudioClip attackSound2;
 
+    public AudioClip UpgradeStatSound;
+
     private void Awake()
     {
         if (Instance == null)
