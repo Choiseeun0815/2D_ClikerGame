@@ -9,7 +9,10 @@ public class CharacterManager : MonoBehaviour
         {
             if (instance == null)
             {
-                instance = new GameObject("CharacterManger").AddComponent<CharacterManager>();
+                if (instance == null)
+                {
+                    instance = new GameObject("CharacterManager").AddComponent<CharacterManager>();
+                }
             }
             return instance;
         }
@@ -20,5 +23,27 @@ public class CharacterManager : MonoBehaviour
     {
         get { return player; }
         set { player = value; }
+    }
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+        if (player == null)
+        {
+            player = FindObjectOfType<Player>();
+            if (player == null)
+            {
+                Debug.LogError("Player 인스턴스 씬에 없음");
+            }
+        }
     }
 }

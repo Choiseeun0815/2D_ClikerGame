@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public ObjectPool pool;
     public EnemySpawner enemySpawner;
+    public UpgradeState upgradeState;
 
     // Stage 5-1 => 5´Â currentStage, 1Àº currentMiniState
     public int currentStage = 1;
@@ -26,12 +27,12 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        enemySpawner = GetComponent<EnemySpawner>();
+        upgradeState = GetComponent<UpgradeState>();
     }
 
     private void Start()
     {
-        enemySpawner = GetComponent<EnemySpawner>();
-
         if(enemySpawner != null )
             enemySpawner.SpawningEnemy();
     }

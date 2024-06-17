@@ -20,10 +20,6 @@ public class PlayerAttackController : MonoBehaviour
         curHP = Data.maxHealth;
     }
 
-    void Update()
-    {
-        
-    }
     public void OnAttack(InputAction.CallbackContext context)
     {
         if (CheckAttacking()) return;
@@ -64,8 +60,7 @@ public class PlayerAttackController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ãæµ¹");
-        if(collision.CompareTag("Enemy"))
+        if(GameManager.Instance.CanAutoAttack && collision.CompareTag("Enemy"))
         {
             Enemy enemy = collision.GetComponent<Enemy>();
             if(enemy!=null)
@@ -86,10 +81,9 @@ public class PlayerAttackController : MonoBehaviour
     {
         isAttacking = true;
         while(enemy!= null && isAttacking)
-        //while (enemy != null )
         {
             enemy.TakeDamage(Data.Damage);
-            animator.SetTrigger("Attack");
+            animator.SetTrigger("AutoAttack");
             yield return new WaitForSeconds(Data.AutoAttackSpeed);
         }
         isAttacking = false;
@@ -100,5 +94,4 @@ public class PlayerAttackController : MonoBehaviour
         curHP -= damage;
         animator.SetTrigger("Hit");
     }
-    
 }
