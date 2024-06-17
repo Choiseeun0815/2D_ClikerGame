@@ -625,10 +625,10 @@ MonoBehaviour:
   pools:
   - tag: Mushroom
     prefab: {fileID: 3683893364175502415, guid: 5c7f52bfa617fb848bac9696866efea8, type: 3}
-    size: 3
+    size: 2
   - tag: Goblin
     prefab: {fileID: 7292555733759223583, guid: bb1a96d1d1e99134aa2dc0312c550d1c, type: 3}
-    size: 3
+    size: 2
 --- !u!1 &1219098084
 GameObject:
   m_ObjectHideFlags: 0

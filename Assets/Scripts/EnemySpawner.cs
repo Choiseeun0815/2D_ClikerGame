@@ -12,10 +12,13 @@ public class EnemySpawner : MonoBehaviour
         if (GameManager.Instance.pool.pools.Count == 0) return;
 
         int rndIndex = Random.Range(0, GameManager.Instance.pool.pools.Count);
+        Debug.Log($"pools.Count : {GameManager.Instance.pool.pools.Count}");
         var selecetedEnemy = GameManager.Instance.pool.pools[rndIndex];
 
         GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(selecetedEnemy.tag);
-        if(enemyObj != null)
+        Debug.Log($"curRndIndex : {rndIndex} // tag : {selecetedEnemy.tag}" );
+
+        if (enemyObj != null)
         {
             enemyObj.transform.position = spawnPos.position;
             enemyObj.SetActive(true);
@@ -23,24 +26,9 @@ public class EnemySpawner : MonoBehaviour
             Enemy enemy = enemyObj.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.OnDeath += () => OnEnemyDeath(enemyObj);
                 StartCoroutine(MoveToTargetPos(enemyObj));
             }
         }
-        //foreach (var items in GameManager.Instance.pool.pools)
-        //{
-        //    for (int i = 0; i < items.size; i++)
-        //    {
-        //        GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(items.tag);
-        //        if (enemyObj != null)
-        //        {
-        //            enemyObj.transform.position = spawnPos.position;
-        //            enemyObj.SetActive(true);
-
-        //            StartCoroutine(MoveToTargetPos(enemyObj));
-        //        }
-        //    }
-        //}
     }
     private IEnumerator MoveToTargetPos(GameObject enemyObj)
     {
@@ -66,14 +54,5 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void OnEnemyDeath(GameObject enemyObj)
-    {
-        var enemy = enemyObj.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.OnDeath -= () => OnEnemyDeath(enemyObj);
-        }
-
-        SpawningEnemy();
-    }
+    
 }

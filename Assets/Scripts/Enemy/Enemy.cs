@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] EnemyHpBar enemyHpBar;
 
-    public event Action OnDeath; // 죽었을 때 발생하는 이벤트
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -28,7 +28,6 @@ public class Enemy : MonoBehaviour
     {
         curHP = Data.maxHealth;
         enemyHpBar.UpdateHpBar(curHP, Data.maxHealth);
-        //OnDeath = null;
     }
     public void TakeDamage(float damage)
     {
@@ -57,6 +56,6 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);
-        OnDeath?.Invoke();
+        GameManager.Instance.enemySpawner.SpawningEnemy();
     }
 }
