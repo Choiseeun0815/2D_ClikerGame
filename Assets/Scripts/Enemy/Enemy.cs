@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,9 +11,13 @@ public class Enemy : MonoBehaviour
     public int curHP;
 
     private Animator animator;
-    void Start()
+
+    private void Awake()
     {
         animator = GetComponent<Animator>();
+    }
+    void Start()
+    {
         curHP = Data.maxHealth;
     }
 
@@ -36,11 +41,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public void RunAnim(bool isRunning)
+    {
+        if (animator != null)
+        {
+            animator.SetBool("Run", isRunning);
+        }
+        else
+        {
+            Debug.LogWarning("Animator is not assigned in Enemy!");
+        }
+    }
     private IEnumerator DisableAfterAnimation()
     {
-        float animationLength = animator.GetCurrentAnimatorStateInfo(0).length;
-        yield return new WaitForSeconds(animationLength);
-
+        yield return new WaitForSeconds(1.2f);
         gameObject.SetActive(false);
     }
 }

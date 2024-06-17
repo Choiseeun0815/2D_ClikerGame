@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public PlayerController controller;
+    public PlayerAttackController controller;
     private void Start()
     {
-        controller = GetComponent<PlayerController>();
+        controller = GetComponent<PlayerAttackController>();
     }
 }
