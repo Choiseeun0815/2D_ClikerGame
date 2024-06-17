@@ -4,14 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Transform spawnPos;
-    [SerializeField] Transform targetPos;
-    private ObjectPool pool;
+    [SerializeField] public Transform spawnPos;
+    [SerializeField] public Transform targetPos;
 
-    void Start()
-    {
-        pool = GameManager.Instance.pool;
-    }
 
     void Update()
     {
@@ -19,11 +14,11 @@ public class EnemySpawner : MonoBehaviour
     }
     public void SpawningEnemy()
     {
-        foreach (var items in pool.pools)
+        foreach (var items in GameManager.Instance.pool.pools)
         {
             for (int i = 0; i < items.size; i++)
             {
-                GameObject enemyObj = pool.SpawnFromPool(items.tag);
+                GameObject enemyObj = GameManager.Instance.pool.SpawnFromPool(items.tag);
                 if (enemyObj != null)
                 {
                     enemyObj.transform.position = spawnPos.position;
@@ -45,7 +40,7 @@ public class EnemySpawner : MonoBehaviour
                 enemy.RunAnim(true);
             }
 
-            enemyObj.transform.position = Vector2.MoveTowards(enemyObj.transform.position, targetPos.position, 2f * Time.deltaTime);
+            enemyObj.transform.position = Vector2.MoveTowards(enemyObj.transform.position, targetPos.position, 4f * Time.deltaTime);
             yield return null;
 
             if (enemy != null)

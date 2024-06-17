@@ -308,7 +308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1088851289}
-  - component: {fileID: 1088851288}
+  - component: {fileID: 1088851290}
   m_Layer: 0
   m_Name: ObjectPool
   m_TagString: Untagged
@@ -316,7 +316,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1088851288
+--- !u!4 &1088851289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1088851287}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1088851290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -330,24 +345,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 1088851289}
   pools:
-  - tag: Goblin
+  - tag: Gobline
     prefab: {fileID: 7292555733759223583, guid: bb1a96d1d1e99134aa2dc0312c550d1c, type: 3}
     size: 1
---- !u!4 &1088851289
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1088851287}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.11235679, y: 0.08088416, z: -0.07699888}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1219098084
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,8 +647,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1386940240}
-  - component: {fileID: 1386940239}
   - component: {fileID: 1386940241}
+  - component: {fileID: 1386940242}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -656,20 +656,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1386940239
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1386940238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e008ed9eeef0f3418c9b3c18a13f705, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pool: {fileID: 1088851288}
-  enemySpawner: {fileID: 0}
 --- !u!4 &1386940240
 Transform:
   m_ObjectHideFlags: 0
@@ -699,6 +685,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPos: {fileID: 1344879021}
   targetPos: {fileID: 1273088394}
+--- !u!114 &1386940242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386940238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e008ed9eeef0f3418c9b3c18a13f705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pool: {fileID: 1088851290}
+  enemySpawner: {fileID: 0}
 --- !u!1 &1874726156
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,5 +887,5 @@ SceneRoots:
   - {fileID: 5430788565422221245}
   - {fileID: 2008340165}
   - {fileID: 1386940240}
-  - {fileID: 1874726157}
   - {fileID: 1088851289}
+  - {fileID: 1874726157}
