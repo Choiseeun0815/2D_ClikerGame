@@ -1,7 +1,7 @@
-
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,12 +9,19 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI GoldTxt;
     [SerializeField] private GameObject UpgradeStatPanel;
 
+    [Header("Attack Upgrade Button")]
     [SerializeField] private TextMeshProUGUI attackUpgradeBtnTxt;
+    [SerializeField] private TextMeshProUGUI CurrnetAttackStat;
+    [SerializeField] private Image attackUpgradeBtnColor;
+
+    [Header("AutoAttack Upgrade Button")]
+    [SerializeField] private TextMeshProUGUI AutoAttackUpgradeBtnTxt;
+    [SerializeField] private TextMeshProUGUI CurrnetAutoStat;
+    [SerializeField] private Image AutoUpgradeBtnColor;
 
     private void Start()
     {
         UpgradeStatPanel.SetActive(false);
-        SetUpgradeStatPanel();
     }
     private void Update()
     {
@@ -22,6 +29,10 @@ public class UIManager : MonoBehaviour
         {
             StageTxt.text = $"Stage {GameManager.Instance.currentStage}-{GameManager.Instance.currentMiniState}";
             GoldTxt.text = $"GOLD : {GameManager.Instance.Gold} G";
+
+            SetButtonColor();
+            
+            SetUpgradeAttackTxt(); SetUpgradeAutoTxt();
         }
     }
 
@@ -33,13 +44,52 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SetUpgradeStatPanel()
+    public void SetUpgradeAttackTxt()
     {
         if (GameManager.Instance != null)
         {
+            //<color=#FF0000> ¡æ »¡°£»ö
             attackUpgradeBtnTxt.text = $"{GameManager.Instance.upgradeState.currentAttakUpgradeCost}G\n" +
             $"Upgrade\n" +
             $"<color=#FF0000>+{GameManager.Instance.upgradeState.plusAttackStat}</color>";
+
+            CurrnetAttackStat.text = $"Current Attack\nLv.<color=#FF0000>{GameManager.Instance.upgradeState.attackLevel}</color>" +
+                $"\nDamage : <color=#FF0000>{CharacterManager.Instance.Player.controller.Data.Damage}</color>";
         }
+    }
+
+    public void SetUpgradeAutoTxt()
+    {
+        if (GameManager.Instance != null)
+        {
+            AutoAttackUpgradeBtnTxt.text = $"{GameManager.Instance.upgradeState.currentAutoUpgradeCost}G\n" +
+           $"Upgrade\n" +
+           $"<color=#FF0000>+{GameManager.Instance.upgradeState.plusAttackStat}</color>";
+
+            CurrnetAutoStat.text = $"Auto Attack\nLv.<color=#FF0000>{GameManager.Instance.upgradeState.autoAttackLevel}</color>" +
+                $"\nSpeed : {CharacterManager.Instance.Player.controller.Data.AutoAttackSpeed}";
+        }
+    }
+
+    void SetButtonColor()
+    {
+        if (GameManager.Instance.upgradeState.currentAttakUpgradeCost > GameManager.Instance.Gold)
+        {
+            attackUpgradeBtnColor.color = new Color(0.9f, 0.9f, 0.9f); 
+        }
+        else
+        {
+            attackUpgradeBtnColor.color = Color.green;
+        }
+
+        if (GameManager.Instance.upgradeState.currentAutoUpgradeCost > GameManager.Instance.Gold)
+        {
+            AutoUpgradeBtnColor.color = new Color(0.9f, 0.9f, 0.9f); 
+        }
+        else
+        {
+            AutoUpgradeBtnColor.color = Color.green;
+        }
+
     }
 }
